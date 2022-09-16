@@ -7,9 +7,15 @@ resource "digitalocean_droplet" "web" {
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_1.id]
 }
 
+resource "digitalocean_record" "record-1" {
+  domain = digitalocean_domain.domain-1.name
+  type   = "A"
+  name   = "@"
+  value  = digitalocean_loadbalancer.loadbalancer-1.ip
+}
+
 resource "digitalocean_domain" "domain-1" {
   name = "project77.home-cooking.ru"
-  ip_address = digitalocean_loadbalancer.loadbalancer-1.ip
 }
 
 resource "digitalocean_certificate" "certificate-1" {
@@ -47,7 +53,5 @@ resource "digitalocean_loadbalancer" "loadbalancer-1" {
     path     = "/"
   }
 
-  redirect_http_to_https           = true
-  disable_lets_encrypt_dns_records = true
   droplet_ids = digitalocean_droplet.web.*.id
 }
