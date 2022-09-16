@@ -1,4 +1,3 @@
 variable "do_token" {}
-variable "DD_API_KEY" {}
-variable "DD_APP_KEY" {}
-
+variable "datadog_api_key" {}
+variable "datadog_app_key" {}
