@@ -4,5 +4,5 @@ collections:
   - ansible.posix
 
 roles:
-  - name: datadog.datadog
-  - name: geerlingguy.pip
+  - datadog.datadog
+  - geerlingguy.pip
