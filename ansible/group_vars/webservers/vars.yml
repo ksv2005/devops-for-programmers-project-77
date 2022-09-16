@@ -7,7 +7,7 @@ datadog_checks:
   http_check:
     init_config:
     instances:
-      - name: Application health check status
+      - name: HTTP Check
         url: https://project77.home-cooking.ru/
         timeout: 5
         method: GET
