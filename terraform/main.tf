@@ -7,7 +7,7 @@ resource "digitalocean_droplet" "web" {
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_1.id]
 }
 
-resource "digitalocean_loadbalancer" "loadbalancer_1" {
+resource "digitalocean_loadbalancer" "loadbalancer-1" {
   name   = "loadbalancer"
   region = "ams3"
 
@@ -39,7 +39,7 @@ resource "digitalocean_loadbalancer" "loadbalancer_1" {
 
 resource "digitalocean_domain" "domain-1" {
   name = "project77.home-cooking.ru"
-  ip_address = digitalocean_loadbalancer.loadbalancer_1.ip
+  ip_address = digitalocean_loadbalancer.loadbalancer-1.ip
 }
 
 resource "digitalocean_certificate" "certificate-1" {
