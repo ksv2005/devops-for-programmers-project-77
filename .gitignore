@@ -1,0 +1,4 @@
+.idea
+.terraform
+*.auto.tfvars
+*.backup
