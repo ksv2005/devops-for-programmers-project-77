@@ -7,7 +7,7 @@ resource "digitalocean_droplet" "web" {
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_1.id]
 }
 
-resource "digitalocean_record" "static_domain_record" {
+resource "digitalocean_record" "record-1" {
   domain = digitalocean_domain.domain-1.name
   type   = "A"
   name   = "@"
@@ -23,14 +23,6 @@ resource "digitalocean_loadbalancer" "loadbalancer-1" {
     entry_port      = 80
     target_protocol = "http"
     target_port     = 3000
-  }
-
-  forwarding_rule {
-    entry_protocol   = "https"
-    entry_port       = 443
-    target_protocol  = "http"
-    target_port      = 3000
-    certificate_name = digitalocean_certificate.certificate-1.name
   }
 
   healthcheck {
