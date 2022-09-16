@@ -14,6 +14,20 @@ resource "digitalocean_record" "record-1" {
   value  = digitalocean_loadbalancer.loadbalancer-1.ip
 }
 
+resource "digitalocean_domain" "domain-1" {
+  name = "project77.home-cooking.ru"
+}
+
+resource "digitalocean_certificate" "certificate-1" {
+  name    = "certificate-1"
+  type    = "lets_encrypt"
+  domains = [digitalocean_domain.domain-1.name]
+}
+
+data "digitalocean_ssh_key" "ssh_key_1" {
+  name = "do-2022"
+}
+
 resource "digitalocean_loadbalancer" "loadbalancer-1" {
   name   = "loadbalancer"
   region = "ams3"
@@ -25,6 +39,14 @@ resource "digitalocean_loadbalancer" "loadbalancer-1" {
     target_port     = 3000
   }
 
+  forwarding_rule {
+    entry_protocol   = "https"
+    entry_port       = 443
+    target_protocol  = "http"
+    target_port      = 3000
+    certificate_name = digitalocean_certificate.certificate-1.name
+  }
+
   healthcheck {
     port     = 3000
     protocol = "http"
@@ -32,19 +54,4 @@ resource "digitalocean_loadbalancer" "loadbalancer-1" {
   }
 
   droplet_ids = digitalocean_droplet.web.*.id
-}
-
-resource "digitalocean_domain" "domain-1" {
-  name = "project77.home-cooking.ru"
-  ip_address = digitalocean_loadbalancer.loadbalancer-1.ip
-}
-
-resource "digitalocean_certificate" "certificate-1" {
-  name    = "certificate-1"
-  type    = "lets_encrypt"
-  domains = [digitalocean_domain.domain-1.name]
-}
-
-data "digitalocean_ssh_key" "ssh_key_1" {
-  name = "do-2022"
 }
