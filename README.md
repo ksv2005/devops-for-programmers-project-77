@@ -3,6 +3,10 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/ksv2005/devops-for-programmers-project-77/workflows/hexlet-check/badge.svg)](https://github.com/ksv2005/devops-for-programmers-project-77/actions)
 
+## URL приложения
+
+https://project77.home-cooking.ru/
+
 ## Требования для системы
 
 Terraform 1.2.9
