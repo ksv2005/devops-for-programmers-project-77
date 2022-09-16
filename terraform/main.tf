@@ -8,19 +8,38 @@ resource "digitalocean_droplet" "web" {
 }
 
 resource "digitalocean_loadbalancer" "loadbalancer_1" {
-  name = "loadbalancer-1"
+  name   = "security-loadbalancer-example"
   region = "ams3"
+
+  sticky_sessions {
+    type               = "cookies"
+    cookie_name        = "lb"
+    cookie_ttl_seconds = 120
+  }
+
   forwarding_rule {
-    entry_port = 80
-    entry_protocol = "http"
-    target_port = 3000
+    entry_protocol  = "http"
+    entry_port      = 80
     target_protocol = "http"
+    target_port     = 3000
   }
+
+  forwarding_rule {
+    entry_protocol   = "https"
+    entry_port       = 443
+    target_protocol  = "http"
+    target_port      = 3000
+    certificate_name = digitalocean_certificate.cert.name
+  }
+
   healthcheck {
-    port = 3000
+    port     = 3000
     protocol = "http"
-    path = "/"
+    path     = "/"
   }
+
+  redirect_http_to_https           = true
+  disable_lets_encrypt_dns_records = true
   droplet_ids = digitalocean_droplet.web.*.id
 }
 
