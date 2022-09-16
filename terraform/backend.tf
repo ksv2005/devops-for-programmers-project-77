@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "hexlet"
+    organization = "ksv2005"
 
     workspaces {
-      name = "ksv2005-app"
+      name = "example-workspace"
     }
   }
 }
