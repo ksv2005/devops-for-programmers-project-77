@@ -8,14 +8,8 @@ resource "digitalocean_droplet" "web" {
 }
 
 resource "digitalocean_loadbalancer" "loadbalancer_1" {
-  name   = "security-loadbalancer-example"
+  name   = "loadbalancer"
   region = "ams3"
-
-  sticky_sessions {
-    type               = "cookies"
-    cookie_name        = "lb"
-    cookie_ttl_seconds = 120
-  }
 
   forwarding_rule {
     entry_protocol  = "http"
@@ -29,7 +23,7 @@ resource "digitalocean_loadbalancer" "loadbalancer_1" {
     entry_port       = 443
     target_protocol  = "http"
     target_port      = 3000
-    certificate_name = digitalocean_certificate.cert.name
+    certificate_name = digitalocean_certificate.certificate-1.name
   }
 
   healthcheck {
@@ -48,8 +42,8 @@ resource "digitalocean_domain" "domain-1" {
   ip_address = digitalocean_loadbalancer.loadbalancer_1.ip
 }
 
-resource "digitalocean_certificate" "cert" {
-  name    = "certificate-domain"
+resource "digitalocean_certificate" "certificate-1" {
+  name    = "certificate-1"
   type    = "lets_encrypt"
   domains = [digitalocean_domain.domain-1.name]
 }
