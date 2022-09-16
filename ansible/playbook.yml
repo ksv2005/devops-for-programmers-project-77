@@ -1,5 +1,4 @@
-- name: Deploy app
-  hosts: all
+- hosts: all
   gather_facts: false
   tasks:
     - community.docker.docker_login:
@@ -11,8 +10,8 @@
         published_ports:
           - 3000:3000
 
-- name: Datadog check
-  hosts: all
-  gather_facts: no
   roles:
-    - role: datadog.datadog
+    - { role: datadog.datadog, become: yes }
+  vars:
+    datadog_api_key: '{{ datadog_api_key }}'
+    datadog_site: '{{ datadog_site }}'
