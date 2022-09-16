@@ -16,6 +16,7 @@ resource "digitalocean_record" "record-1" {
 
 resource "digitalocean_domain" "domain-1" {
   name = "project77.home-cooking.ru"
+  ip_address = digitalocean_loadbalancer.loadbalancer-1.ip
 }
 
 resource "digitalocean_certificate" "certificate-1" {
