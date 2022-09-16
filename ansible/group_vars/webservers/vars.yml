@@ -1,0 +1,2 @@
+docker_login: "{{ vault_docker_login }}"
+docker_password: "{{ vault_docker_password }}"

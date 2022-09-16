@@ -1,0 +1,11 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - community.docker.docker_login:
+        username: "{{ docker_login }}"
+        password: "{{ docker_password }}"
+    - community.docker.docker_container:
+        name: devops-example-app
+        image: "{{ docker_login }}/devops-example-app"
+        published_ports:
+          - 3000:3000

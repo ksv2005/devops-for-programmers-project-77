@@ -1,0 +1,7 @@
+collections:
+  - community.general
+  - community.docker
+  - ansible.posix
+
+roles:
+  - name: geerlingguy.pip
