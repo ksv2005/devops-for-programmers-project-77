@@ -1,1 +1,4 @@
-variable "do_token" {}
+variable "do_token" {
+  description = "DO API token"
+  type        = string
+}
