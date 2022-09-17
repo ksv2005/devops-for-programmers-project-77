@@ -1,20 +1,13 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: Update cache
-      become: true
-      apt:
-        update_cache: yes
-
-    - name: Install packages
+    - name: Install pip
       ansible.builtin.apt:
-        pkg:
-          - python3-docker
-          - python3-pip
+        name: python3-pip
         update_cache: yes
 
     - name: Install Docker
-      ansible.builtin.pip:
+      pip:
         name: docker
 
     - name: Run container
