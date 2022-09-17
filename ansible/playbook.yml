@@ -9,6 +9,8 @@
         image: "{{ docker_login }}/devops-example-app"
         published_ports:
           - 3000:3000
+
+- hosts: webservers
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
