@@ -2,12 +2,3 @@ docker_login: "{{ vault_docker_login }}"
 docker_password: "{{ vault_docker_password }}"
 datadog_api_key: "{{ vault_datadog_api_key }}"
 datadog_site: "datadoghq.com"
-
-datadog_checks:
-  http_check:
-    init_config:
-    instances:
-      - name: HTTP Check
-        url: https://project77.home-cooking.ru/
-        timeout: 5
-        method: GET
