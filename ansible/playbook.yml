@@ -1,11 +1,23 @@
 - hosts: all
   gather_facts: false
   tasks:
-    - community.docker.docker_container:
+    - name: Install packages
+      apt:
+        name: python3-pip
+        update_cache: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Run container
+      community.docker.docker_container:
         name: devops-example-app
-        image: "ksv2005/devops-example-app"
-        published_ports:
-          - 3000:3000
+        image: ksv2005/devops-example-app
+        published_ports: 3000:3000
+        restart_policy: always
+        restart: yes
+
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
