@@ -1,11 +1,8 @@
 collections:
+  - community.docker
   - community.general
   - ansible.posix
-  - name: community.docker
-    version: 2.7.1
 
 roles:
-  - name: geerlingguy.pip
-    version: 2.1.0
   - name: datadog.datadog
-    version: 4.12.0
+  - name: geerlingguy.pip
