@@ -6,6 +6,7 @@
         image: "{{ docker_image }}"
         published_ports:
           - 3000:3000
+        become: true
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
