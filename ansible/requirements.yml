@@ -1,6 +1,9 @@
 collections:
-  - community.docker
+  - name: community.docker
+    version: 2.0.2
 
 roles:
   - name: geerlingguy.pip
+    version: 2.1.0
   - name: datadog.datadog
+    version: 4.12.0
