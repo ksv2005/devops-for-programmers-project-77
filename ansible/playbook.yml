@@ -1,13 +1,11 @@
 - hosts: all
   gather_facts: false
-  remote_user: root
   tasks:
     - community.docker.docker_container:
         name: devops-example-app
-        image: "{{ docker_image }}"
+        image: "ksv2005/devops-example-app"
         published_ports:
           - 3000:3000
-
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
