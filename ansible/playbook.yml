@@ -1,12 +1,12 @@
 - hosts: all
-  gather_facts: false
+  gather_facts: no
   tasks:
     - name: Install packages
       apt:
         name: python3-pip
         update_cache: yes
 
-    - name: Install Docker Module for Python
+    - name: Install Docker
       pip:
         name: docker
 
@@ -17,6 +17,9 @@
         published_ports: 3000:3000
         restart_policy: always
         restart: yes
+        pull: yes
+        env:
+          SERVER_MESSAGE: "{{ ansible_default_ipv4.address }}"
 
   roles:
     - { role: datadog.datadog, become: yes }
