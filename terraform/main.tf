@@ -1,9 +1,9 @@
 resource "digitalocean_droplet" "web" {
-  count              = 2
-  image              = "docker-20-04"
-  name               = "web-${count.index + 1}"
-  region             = "ams3"
-  size               = "s-1vcpu-1gb"
+  count    = 2
+  image    = "docker-20-04"
+  name     = "web-${count.index + 1}"
+  region   = "ams3"
+  size     = "s-1vcpu-1gb"
   ssh_keys = [data.digitalocean_ssh_key.ssh_key_1.id]
 }
 
@@ -59,6 +59,6 @@ resource "digitalocean_loadbalancer" "loadbalancer-1" {
 resource "datadog_monitor" "http_monitor" {
   name    = "http_monitor"
   type    = "service check"
-  query = "\"http.can_connect\".over(\"instance:http_health_check\").by(\"host\",\"instance\",\"url\").last(4).count_by_status()"
+  query   = "\"http.can_connect\".over(\"instance:http_health_check\").by(\"host\",\"instance\",\"url\").last(4).count_by_status()"
   message = "{{host.name}} not available"
 }
