@@ -1,6 +1,8 @@
 collections:
-  - community.docker
-  - community.general
+  - name: community.docker
+    version: 2.7.1
+  - name: community.general
+    version: 5.6.0
 
 roles:
   - name: geerlingguy.pip
